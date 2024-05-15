@@ -47,7 +47,7 @@ const Links = () => {
                         <NavLink item={{title: "Login", path: "/login"}}/>
                 )}
             </div>
-            <button>Menu</button>
+            <button onClick ={() => setOpen((prev) => !prev)}>Menu</button>
             {
              open && <div className={styles.mobileLinks}>
                 {links.map((link) =>(
