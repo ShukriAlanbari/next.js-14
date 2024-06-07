@@ -1,19 +1,29 @@
+import PostUser from '@/components/postUser/postUser';
 import styles from './singlePost.module.css';
 import Image from 'next/image';
+import { Suspense } from 'react';
+import { getPost } from '@/lib/data';
 
-const getData = async (slug) => {
-  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
+// FETCH DATA WITH AN API
 
-  if (!res.ok) {
-    throw new Error('Something went wrong');
-  }
+// const getData = async (slug) => {
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
 
-  return res.json();
-};
+//   if (!res.ok) {
+//     throw new Error('Something went wrong');
+//   }
+
+//   return res.json();
+// };
 
 const SinglePostPage = async ({ params }) => {
   const { slug } = params;
-  const post = await getData(slug);
+
+  // FETCH DATA WITH AN API
+  // const post = await getData(slug);
+
+  // FETCH DATA WITHOUT AN API
+  const post = await getPost(slug);
   return (
     <div className={styles.container}>
       <div className={styles.imgContainer}>
@@ -34,10 +44,9 @@ const SinglePostPage = async ({ params }) => {
             width={50}
             height={50}
           />
-          <div className={styles.detailText}>
-            <span className={styles.detailTitle}>Author</span>
-            <span className={styles.detailValue}>Shukri Alanbari</span>
-          </div>
+          <Suspense fallback={<div>Loading...</div>}>
+            <PostUser userId={post.userId} />
+          </Suspense>
           <div className={styles.detailText}>
             <span className={styles.detailTitle}>Published</span>
             <span className={styles.detailValue}>16.05.2024</span>
