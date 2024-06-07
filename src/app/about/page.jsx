@@ -1,6 +1,5 @@
-import Image from "next/image";
-import styles from "./about.module.css";
-import { ClientPageRoot } from "next/dist/client/components/client-page";
+import Image from 'next/image';
+import styles from './about.module.css';
 
 const AboutPage = () => {
   return (
